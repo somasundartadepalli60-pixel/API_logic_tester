@@ -32,3 +32,8 @@ class TestPolicy86(unittest.TestCase):
     """Verify head allowed."""
     def test_head_allowed(self):
         self.assertIs(evaluate(('HEAD', '/items', 200, 'guest', 'allow')), True)
+
+class TestPolicy87(unittest.TestCase):
+    """Verify options allowed."""
+    def test_options_allowed(self):
+        self.assertIs(evaluate(('OPTIONS', '/items', 204, 'service', 'allow')), True)
