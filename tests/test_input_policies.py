@@ -97,3 +97,8 @@ class TestPolicy99(unittest.TestCase):
     """Verify unknown decision rejected."""
     def test_unknown_decision_rejected(self):
         self.assertIs(evaluate(('GET', '/items', 200, 'viewer', 'maybe')), False)
+
+class TestPolicy100(unittest.TestCase):
+    """Verify boundary status accepted."""
+    def test_boundary_status_accepted(self):
+        self.assertIs(evaluate(('GET', '/items', 599, 'viewer', 'review')), True)
