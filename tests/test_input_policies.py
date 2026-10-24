@@ -27,3 +27,8 @@ class TestPolicy85(unittest.TestCase):
     """Verify delete allowed."""
     def test_delete_allowed(self):
         self.assertIs(evaluate(('DELETE', '/items/1', 204, 'admin', 'allow')), True)
+
+class TestPolicy86(unittest.TestCase):
+    """Verify head allowed."""
+    def test_head_allowed(self):
+        self.assertIs(evaluate(('HEAD', '/items', 200, 'guest', 'allow')), True)
