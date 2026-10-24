@@ -37,3 +37,8 @@ class TestPolicy87(unittest.TestCase):
     """Verify options allowed."""
     def test_options_allowed(self):
         self.assertIs(evaluate(('OPTIONS', '/items', 204, 'service', 'allow')), True)
+
+class TestPolicy88(unittest.TestCase):
+    """Verify lowercase method rejected."""
+    def test_lowercase_method_rejected(self):
+        self.assertIs(evaluate(('get', '/items', 200, 'viewer', 'allow')), False)
