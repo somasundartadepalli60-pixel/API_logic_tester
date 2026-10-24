@@ -1,0 +1,142 @@
+[
+  {
+    "simulation_number": 81,
+    "branch": "local-pr/081-regression-get_allowed",
+    "feature_commit": "ed79a44b0ddb665199958e14acf7eba29ff71e27",
+    "description": "Regression coverage for get allowed",
+    "hosted_pr": false
+  },
+  {
+    "simulation_number": 82,
+    "branch": "local-pr/082-regression-post_allowed",
+    "feature_commit": "0a1a4b9adf00d90671f989013cf93061e4ef955e",
+    "description": "Regression coverage for post allowed",
+    "hosted_pr": false
+  },
+  {
+    "simulation_number": 83,
+    "branch": "local-pr/083-regression-put_allowed",
+    "feature_commit": "a17559f55f22c1d383a3609acc15611edb63ce24",
+    "description": "Regression coverage for put allowed",
+    "hosted_pr": false
+  },
+  {
+    "simulation_number": 84,
+    "branch": "local-pr/084-regression-patch_allowed",
+    "feature_commit": "bd9ef609cb5bd973ebc99fdf8cab1df97c94917a",
+    "description": "Regression coverage for patch allowed",
+    "hosted_pr": false
+  },
+  {
+    "simulation_number": 85,
+    "branch": "local-pr/085-regression-delete_allowed",
+    "feature_commit": "9fde35f353a01a0cdda06ebac542d8b909e8511c",
+    "description": "Regression coverage for delete allowed",
+    "hosted_pr": false
+  },
+  {
+    "simulation_number": 86,
+    "branch": "local-pr/086-regression-head_allowed",
+    "feature_commit": "96087f1ae6e61c30ded7026798f6666deafcb8a4",
+    "description": "Regression coverage for head allowed",
+    "hosted_pr": false
+  },
+  {
+    "simulation_number": 87,
+    "branch": "local-pr/087-regression-options_allowed",
+    "feature_commit": "8f69ee827ed0f0c69bc04e8bc82ac000aa91fa66",
+    "description": "Regression coverage for options allowed",
+    "hosted_pr": false
+  },
+  {
+    "simulation_number": 88,
+    "branch": "local-pr/088-regression-lowercase_method_rejected",
+    "feature_commit": "b61b03d5df2ecfcf136378daa9d360d8a55915bf",
+    "description": "Regression coverage for lowercase method rejected",
+    "hosted_pr": false
+  },
+  {
+    "simulation_number": 89,
+    "branch": "local-pr/089-regression-unknown_method_rejected",
+    "feature_commit": "804fafff1f0e8e27fedee9b971ad2fa9e614962e",
+    "description": "Regression coverage for unknown method rejected",
+    "hosted_pr": false
+  },
+  {
+    "simulation_number": 90,
+    "branch": "local-pr/090-regression-relative_path_rejected",
+    "feature_commit": "661b327c9a196dc266fa574f9976949fe33be2bd",
+    "description": "Regression coverage for relative path rejected",
+    "hosted_pr": false
+  },
+  {
+    "simulation_number": 91,
+    "branch": "local-pr/091-regression-double_slash_rejected",
+    "feature_commit": "f4e2aca7785b16943545c889bed66066b3b6abb6",
+    "description": "Regression coverage for double slash rejected",
+    "hosted_pr": false
+  },
+  {
+    "simulation_number": 92,
+    "branch": "local-pr/092-regression-internal_double_slash_rejected",
+    "feature_commit": "c59c176f3157ff7969a06646ff7e44e2d0fd36e5",
+    "description": "Regression coverage for internal double slash rejected",
+    "hosted_pr": false
+  },
+  {
+    "simulation_number": 93,
+    "branch": "local-pr/093-regression-status_below_range_rejected",
+    "feature_commit": "ef756ad1784b75840951af460e4fbfd15e5354b2",
+    "description": "Regression coverage for status below range rejected",
+    "hosted_pr": false
+  },
+  {
+    "simulation_number": 94,
+    "branch": "local-pr/094-regression-status_above_range_rejected",
+    "feature_commit": "0ed3d176935605f4473f21643462352197543667",
+    "description": "Regression coverage for status above range rejected",
+    "hosted_pr": false
+  },
+  {
+    "simulation_number": 95,
+    "branch": "local-pr/095-regression-string_status_rejected",
+    "feature_commit": "645bb64474c37d4c87946eefbe9347b4b31d7a7c",
+    "description": "Regression coverage for string status rejected",
+    "hosted_pr": false
+  },
+  {
+    "simulation_number": 96,
+    "branch": "local-pr/096-regression-unknown_role_rejected",
+    "feature_commit": "fbd0d2ddc098c073c5292adcba2af7b7af01bfdf",
+    "description": "Regression coverage for unknown role rejected",
+    "hosted_pr": false
+  },
+  {
+    "simulation_number": 97,
+    "branch": "local-pr/097-regression-guest_role_accepted",
+    "feature_commit": "428a5ea64a0bcbb87c08de97ffe1af689aab77db",
+    "description": "Regression coverage for guest role accepted",
+    "hosted_pr": false
+  },
+  {
+    "simulation_number": 98,
+    "branch": "local-pr/098-regression-service_role_accepted",
+    "feature_commit": "15d4ddc14d659d34d6d9339f359d7e553b1e2dd2",
+    "description": "Regression coverage for service role accepted",
+    "hosted_pr": false
+  },
+  {
+    "simulation_number": 99,
+    "branch": "local-pr/099-regression-unknown_decision_rejected",
+    "feature_commit": "64b93cc5d77f2521c7192cd785a8312b0813a37f",
+    "description": "Regression coverage for unknown decision rejected",
+    "hosted_pr": false
+  },
+  {
+    "simulation_number": 100,
+    "branch": "local-pr/100-regression-boundary_status_accepted",
+    "feature_commit": "590bdeb3e38643b99b81d837af59e4e297315f5f",
+    "description": "Regression coverage for boundary status accepted",
+    "hosted_pr": false
+  }
+]
