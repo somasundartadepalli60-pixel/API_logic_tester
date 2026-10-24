@@ -42,3 +42,8 @@ class TestPolicy88(unittest.TestCase):
     """Verify lowercase method rejected."""
     def test_lowercase_method_rejected(self):
         self.assertIs(evaluate(('get', '/items', 200, 'viewer', 'allow')), False)
+
+class TestPolicy89(unittest.TestCase):
+    """Verify unknown method rejected."""
+    def test_unknown_method_rejected(self):
+        self.assertIs(evaluate(('TRACE', '/items', 200, 'viewer', 'allow')), False)
