@@ -47,3 +47,8 @@ class TestPolicy89(unittest.TestCase):
     """Verify unknown method rejected."""
     def test_unknown_method_rejected(self):
         self.assertIs(evaluate(('TRACE', '/items', 200, 'viewer', 'allow')), False)
+
+class TestPolicy90(unittest.TestCase):
+    """Verify relative path rejected."""
+    def test_relative_path_rejected(self):
+        self.assertIs(evaluate(('GET', 'items', 200, 'viewer', 'allow')), False)
