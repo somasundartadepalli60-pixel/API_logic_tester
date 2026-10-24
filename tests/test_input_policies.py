@@ -87,3 +87,8 @@ class TestPolicy97(unittest.TestCase):
     """Verify guest role accepted."""
     def test_guest_role_accepted(self):
         self.assertIs(evaluate(('GET', '/public', 200, 'guest', 'deny')), True)
+
+class TestPolicy98(unittest.TestCase):
+    """Verify service role accepted."""
+    def test_service_role_accepted(self):
+        self.assertIs(evaluate(('POST', '/jobs', 202, 'service', 'review')), True)
