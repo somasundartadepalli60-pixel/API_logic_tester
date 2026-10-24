@@ -82,3 +82,8 @@ class TestPolicy96(unittest.TestCase):
     """Verify unknown role rejected."""
     def test_unknown_role_rejected(self):
         self.assertIs(evaluate(('GET', '/items', 200, 'root', 'allow')), False)
+
+class TestPolicy97(unittest.TestCase):
+    """Verify guest role accepted."""
+    def test_guest_role_accepted(self):
+        self.assertIs(evaluate(('GET', '/public', 200, 'guest', 'deny')), True)
