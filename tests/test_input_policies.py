@@ -22,3 +22,8 @@ class TestPolicy84(unittest.TestCase):
     """Verify patch allowed."""
     def test_patch_allowed(self):
         self.assertIs(evaluate(('PATCH', '/items/1', 204, 'editor', 'allow')), True)
+
+class TestPolicy85(unittest.TestCase):
+    """Verify delete allowed."""
+    def test_delete_allowed(self):
+        self.assertIs(evaluate(('DELETE', '/items/1', 204, 'admin', 'allow')), True)
