@@ -157,3 +157,29 @@ Run Flask UI: `python app.py` (install requirements first).
 
 ## Git and simulated PRs
 Git history includes feature-branch merges for 80 local PR-style workflows. `LOCAL_PR_SIMULATIONS.json` describes them. These are **not hosted GitHub/GitLab pull requests**, and must not be represented as such.
+
+
+## Reproducible local commands and dependency metadata
+
+The Python application uses `requirements.txt` and `pyproject.toml` for its Python dependencies.
+`requirements.lock` lists *direct constraints only* and is not a fully resolved Python lock.
+`package-lock.json` is an npm-generated lock for the **dependency-free command launcher**
+(`package.json`), not for Flask or other Python packages.
+
+```bash
+npm ci
+npm run build
+npm test
+npm start
+```
+
+Alternatively use `python -m pip install -r requirements.txt` and `python app.py`.
+The npm scripts require Python on your PATH. No API keys or `.env` file are needed.
+
+## Collaboration and PR provenance
+
+`LOCAL_PR_SIMULATIONS.json` and `LOCAL_PR_ADDITIONS.json` describe locally merged
+feature branches. They are **not hosted pull requests**, and the commit author
+is one local project identity, not evidence of multiple independent contributors.
+For the hosted-PR and distinct-collaborator checks, publish this repository,
+invite a real collaborator, and have contributors open and merge genuine PRs.

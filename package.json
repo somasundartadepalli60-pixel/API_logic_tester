@@ -1,0 +1,12 @@
+{
+  "name": "apipath-sentinel-local-tools",
+  "version": "1.1.0",
+  "private": true,
+  "description": "Dependency-free local commands for the Python application",
+  "scripts": {
+    "start": "python app.py",
+    "test": "python -m unittest discover -s tests",
+    "build": "python -m compileall -q app.py casepacks tests"
+  },
+  "dependencies": {}
+}
