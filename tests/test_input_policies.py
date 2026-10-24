@@ -12,3 +12,8 @@ class TestPolicy82(unittest.TestCase):
     """Verify post allowed."""
     def test_post_allowed(self):
         self.assertIs(evaluate(('POST', '/items', 201, 'editor', 'allow')), True)
+
+class TestPolicy83(unittest.TestCase):
+    """Verify put allowed."""
+    def test_put_allowed(self):
+        self.assertIs(evaluate(('PUT', '/items/1', 200, 'editor', 'allow')), True)
