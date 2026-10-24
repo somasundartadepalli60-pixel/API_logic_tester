@@ -77,3 +77,8 @@ class TestPolicy95(unittest.TestCase):
     """Verify string status rejected."""
     def test_string_status_rejected(self):
         self.assertIs(evaluate(('GET', '/items', '200', 'viewer', 'allow')), False)
+
+class TestPolicy96(unittest.TestCase):
+    """Verify unknown role rejected."""
+    def test_unknown_role_rejected(self):
+        self.assertIs(evaluate(('GET', '/items', 200, 'root', 'allow')), False)
