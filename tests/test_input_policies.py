@@ -72,3 +72,8 @@ class TestPolicy94(unittest.TestCase):
     """Verify status above range rejected."""
     def test_status_above_range_rejected(self):
         self.assertIs(evaluate(('GET', '/items', 600, 'viewer', 'allow')), False)
+
+class TestPolicy95(unittest.TestCase):
+    """Verify string status rejected."""
+    def test_string_status_rejected(self):
+        self.assertIs(evaluate(('GET', '/items', '200', 'viewer', 'allow')), False)
