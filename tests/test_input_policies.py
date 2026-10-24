@@ -52,3 +52,8 @@ class TestPolicy90(unittest.TestCase):
     """Verify relative path rejected."""
     def test_relative_path_rejected(self):
         self.assertIs(evaluate(('GET', 'items', 200, 'viewer', 'allow')), False)
+
+class TestPolicy91(unittest.TestCase):
+    """Verify double slash rejected."""
+    def test_double_slash_rejected(self):
+        self.assertIs(evaluate(('GET', '//items', 200, 'viewer', 'allow')), False)
