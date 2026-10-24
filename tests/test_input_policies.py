@@ -57,3 +57,8 @@ class TestPolicy91(unittest.TestCase):
     """Verify double slash rejected."""
     def test_double_slash_rejected(self):
         self.assertIs(evaluate(('GET', '//items', 200, 'viewer', 'allow')), False)
+
+class TestPolicy92(unittest.TestCase):
+    """Verify internal double slash rejected."""
+    def test_internal_double_slash_rejected(self):
+        self.assertIs(evaluate(('GET', '/items//1', 200, 'viewer', 'allow')), False)
