@@ -62,3 +62,8 @@ class TestPolicy92(unittest.TestCase):
     """Verify internal double slash rejected."""
     def test_internal_double_slash_rejected(self):
         self.assertIs(evaluate(('GET', '/items//1', 200, 'viewer', 'allow')), False)
+
+class TestPolicy93(unittest.TestCase):
+    """Verify status below range rejected."""
+    def test_status_below_range_rejected(self):
+        self.assertIs(evaluate(('GET', '/items', 99, 'viewer', 'allow')), False)
