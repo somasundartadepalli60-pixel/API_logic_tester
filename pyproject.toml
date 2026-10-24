@@ -1,0 +1,9 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+[project]
+name = "apipath-sentinel"
+version = "1.1.0"
+description = "Offline-friendly API contract and access validation tool"
+requires-python = ">=3.10"
+dependencies = ["Flask>=3.0,<4.0", "requests>=2.31,<3.0", "PyYAML>=6.0,<7.0"]

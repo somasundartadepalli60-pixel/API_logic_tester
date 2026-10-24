@@ -1,0 +1,161 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "GitHub REST API \u2014 Safe Read-Only Starter",
+    "version": "2022-11-28",
+    "description": "Curated subset of GitHub's official REST API for live, low-impact GET requests. Official docs: https://docs.github.com/en/rest. These public endpoints demonstrate real API traffic; meaningful authorization logic testing should use resources and accounts you own or are authorized to assess."
+  },
+  "servers": [
+    {
+      "url": "https://api.github.com"
+    }
+  ],
+  "paths": {
+    "/users/{username}": {
+      "get": {
+        "summary": "Get a user (public profile)",
+        "description": "Read-only public profile lookup. This endpoint does not test private-resource authorization by itself.",
+        "operationId": "usersGetByUsername",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "octocat"
+            },
+            "description": "Public GitHub username"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User profile returned"
+          },
+          "404": {
+            "description": "User not found"
+          },
+          "403": {
+            "description": "Rate limit or access policy response"
+          }
+        }
+      }
+    },
+    "/repos/{owner}/{repo}": {
+      "get": {
+        "summary": "Get a repository",
+        "description": "Read-only repository metadata lookup. Use a public repository for unauthenticated testing.",
+        "operationId": "reposGet",
+        "parameters": [
+          {
+            "name": "owner",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "octocat"
+            }
+          },
+          {
+            "name": "repo",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "Spoon-Knife"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Repository returned"
+          },
+          "404": {
+            "description": "Repository not found or not visible"
+          },
+          "403": {
+            "description": "Rate limit or access policy response"
+          }
+        }
+      }
+    },
+    "/repos/{owner}/{repo}/issues": {
+      "get": {
+        "summary": "List repository issues",
+        "description": "Read-only list. Set state=open and per_page=2 to keep the response small.",
+        "operationId": "reposListIssues",
+        "parameters": [
+          {
+            "name": "owner",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "octocat"
+            }
+          },
+          {
+            "name": "repo",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "Spoon-Knife"
+            }
+          },
+          {
+            "name": "state",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "open",
+                "closed",
+                "all"
+              ],
+              "default": "open"
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2,
+              "default": 2
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Issues returned"
+          },
+          "404": {
+            "description": "Repository not found or not visible"
+          },
+          "403": {
+            "description": "Rate limit or access policy response"
+          }
+        }
+      }
+    },
+    "/rate_limit": {
+      "get": {
+        "summary": "Check current API rate limits",
+        "description": "Read-only status endpoint. GitHub documents that this endpoint can be used to inspect rate limits.",
+        "operationId": "rateLimitGet",
+        "responses": {
+          "200": {
+            "description": "Rate limit information"
+          },
+          "403": {
+            "description": "Rate limit or access policy response"
+          }
+        }
+      }
+    }
+  }
+}

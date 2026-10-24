@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Reports · APIPath Sentinel{% endblock %}
+{% block content %}
+<section class="page-heading"><div><div class="eyebrow">TEST HISTORY</div><h1>Authorization reports</h1><p>Review past test outcomes and open the saved evidence.</p></div></section>
+<section class="stats"><div class="stat"><span>Passed</span><strong>{{ counts.get('PASS',0) }}</strong></div><div class="stat"><span>Potential mismatches</span><strong class="{{ 'danger-text' if counts.get('FAIL',0) else '' }}">{{ counts.get('FAIL',0) }}</strong></div><div class="stat"><span>Inconclusive</span><strong>{{ counts.get('INCONCLUSIVE',0) }}</strong></div><div class="stat"><span>Total runs</span><strong>{{ runs|length }}</strong></div></section>
+<section class="panel table-panel"><div class="table-scroll"><table><thead><tr><th>Test</th><th>Endpoint</th><th>Role</th><th>Expected</th><th>Observed</th><th>HTTP</th><th>Result</th><th>Time</th></tr></thead><tbody>
+{% for r in runs %}<tr><td><a href="{{ url_for('run_detail', run_id=r.id) }}">#{{ r.id }}</a></td><td><span class="method {{ r.method|lower }}">{{ r.method }}</span> <code>{{ r.path }}</code></td><td>{{ r.role }}</td><td>{{ r.expected|upper }}</td><td>{{ r.observed|upper }}</td><td>{{ r.http_status or '—' }}</td><td><span class="status {{ r.status|lower }}">{{ r.status }}</span></td><td>{{ r.created_at }}</td></tr>{% endfor %}
+</tbody></table></div>{% if not runs %}<div class="empty"><h3>No test results yet</h3><p>Run a controlled test from an endpoint page to create evidence.</p></div>{% endif %}</section>
+{% endblock %}

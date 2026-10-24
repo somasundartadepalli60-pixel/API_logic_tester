@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Test #{{ run.id }} evidence · APIPath Sentinel{% endblock %}
+{% block content %}
+<div class="breadcrumbs"><a href="{{ url_for('index') }}">Dashboard</a><span>/</span><a href="{{ url_for('endpoint_detail', endpoint_id=run.endpoint_id) }}">Endpoint</a><span>/</span>Evidence #{{ run.id }}</div>
+<section class="page-heading"><div><div class="eyebrow">TEST EVIDENCE · {{ run.created_at }}</div><h1>Test #{{ run.id }} <span class="status {{ run.status|lower }}">{{ run.status }}</span></h1><p><span class="method {{ run.method|lower }}">{{ run.method }}</span> <code>{{ run.path }}</code> · Role: <b>{{ run.role }}</b></p></div>
+<a class="btn primary" href="{{ url_for('evidence_json', run_id=run.id) }}">Download JSON evidence ↓</a></section>
+<div class="stats evidence-stats"><div class="stat"><span>Expected decision</span><strong>{{ run.expected|upper }}</strong></div><div class="stat"><span>Observed decision</span><strong>{{ run.observed|upper }}</strong></div><div class="stat"><span>HTTP status</span><strong>{{ run.http_status or '—' }}</strong></div><div class="stat"><span>Duration</span><strong>{{ run.duration_ms if run.duration_ms is not none else '—' }}{% if run.duration_ms is not none %} ms{% endif %}</strong></div></div>
+{% if run.status == 'FAIL' %}<div class="notice danger-notice"><strong>Decision mismatch</strong><p>The observed HTTP decision differs from the saved expectation. Review the endpoint behavior and response body manually before treating this as a vulnerability.</p></div>{% elif run.status == 'INCONCLUSIVE' %}<div class="notice"><strong>Manual review needed</strong><p>The response could not be classified as a clear allow/deny decision.</p></div>{% endif %}
+<div class="two-col evidence-cols">
+<section class="panel"><h2>Request</h2><div class="kv"><span>Method</span><b>{{ evidence.request.method }}</b></div><div class="kv"><span>URL</span><code>{{ evidence.request.url }}</code></div>
+<h3>Headers sent</h3><pre>{{ evidence.request.headers_sent|tojson(indent=2) if evidence.request.headers_sent is defined else '{}' }}</pre>
+<h3>Query parameters</h3><pre>{{ evidence.request.query|tojson(indent=2) if evidence.request.query is defined else '{}' }}</pre>
+<h3>Request body</h3><pre>{{ evidence.request.body|tojson(indent=2) if evidence.request.body is defined else 'No body recorded' }}</pre></section>
+<section class="panel"><h2>Response</h2><div class="kv"><span>HTTP status</span><b>{{ evidence.response.status_code if evidence.response.status_code is defined else 'Request error' }}</b></div>
+{% if evidence.response.headers is defined %}<h3>Response headers</h3><pre>{{ evidence.response.headers|tojson(indent=2) }}</pre>{% endif %}
+<h3>Response excerpt / error</h3><pre class="response-body">{{ evidence.response.body_excerpt if evidence.response.body_excerpt is defined else evidence.response.error }}</pre>
+<h3>Interpretation</h3><pre>{{ evidence.interpretation|tojson(indent=2) }}</pre></section>
+</div>
+{% endblock %}

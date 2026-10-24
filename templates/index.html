@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Dashboard · APIPath Sentinel{% endblock %}
+{% block content %}
+<section class="hero">
+  <div><div class="eyebrow">API SECURITY WORKBENCH</div><h1>Test authorization.<br><span>Find inconsistent access.</span></h1>
+  <p>Map endpoint permissions, test with dedicated accounts, and keep evidence your team can reproduce.</p></div>
+  <div class="hero-icon">⌘</div>
+</section>
+<section class="stats">
+  <div class="stat"><span>Specifications</span><strong>{{ specs|length }}</strong></div>
+  <div class="stat"><span>Endpoints</span><strong>{{ endpoint_count }}</strong></div>
+  <div class="stat"><span>Tests executed</span><strong>{{ run_count }}</strong></div>
+  <div class="stat"><span>Potential mismatches</span><strong class="{{ 'danger-text' if failed_count else '' }}">{{ failed_count }}</strong></div>
+</section>
+<section class="panel">
+  <div class="section-head"><div><div class="eyebrow">GET STARTED</div><h2>Import an API definition</h2></div><span class="tag">JSON · YAML</span></div>
+  <p class="muted">Upload an OpenAPI or Swagger document to build your endpoint inventory.</p>
+  <form action="{{ url_for('import_spec') }}" method="post" enctype="multipart/form-data" class="upload-form">
+    <label class="file-input"><input type="file" name="spec_file" accept=".json,.yaml,.yml" required><span>Choose OpenAPI file</span></label>
+    <button class="btn primary" type="submit">Import specification <span>→</span></button>
+  </form>
+  <div class="divider-label"><span>OR CONNECT YOUR OWN LIVE API</span></div>
+  <form action="{{ url_for('discover_spec') }}" method="post" class="discover-form">
+    <label for="api_url">API base URL or direct OpenAPI document URL</label>
+    <input id="api_url" name="api_url" type="url" placeholder="https://api.example.com" required>
+    <p class="muted">We'll check common documentation paths such as /openapi.json, /swagger.json and /v3/api-docs. This does not crawl or attack the site.</p>
+    <label class="checkline"><input type="checkbox" name="authorized_discovery" value="yes" required> I own this API or have permission to access its documentation.</label>
+    <button class="btn primary" type="submit">Find API documentation →</button>
+  </form>
+  <div class="divider-label"><span>OR START WITH A LIVE API</span></div>
+  <div class="starter-api">
+    <div><strong>GitHub REST API</strong><p class="muted">Officially documented, live API · read-only starter endpoints · no API key required for public data</p><a href="https://docs.github.com/en/rest" target="_blank" rel="noopener noreferrer">Official API documentation ↗</a></div>
+    <form action="{{ url_for('import_github_starter') }}" method="post"><button class="btn secondary" type="submit">Load GitHub API starter →</button></form>
+  </div>
+</section>
+<section class="section-head listing-head"><div><div class="eyebrow">WORKSPACE</div><h2>Your specifications</h2></div></section>
+{% if specs %}
+<div class="spec-list">
+{% for spec in specs %}
+  <article class="spec-card">
+    <div class="spec-symbol">⌘</div><div class="spec-info"><h3><a href="{{ url_for('spec_detail', spec_id=spec.id) }}">{{ spec.name }}</a></h3><p>{{ spec.filename }} · Imported {{ spec.imported_at }}</p></div>
+    <a class="arrow-link" href="{{ url_for('spec_detail', spec_id=spec.id) }}">Open <span>→</span></a>
+  </article>
+{% endfor %}
+</div>
+{% else %}
+<div class="empty"><div class="empty-icon">＋</div><h3>No specifications yet</h3><p>Import your OpenAPI file to start building the authorization matrix.</p></div>
+{% endif %}
+{% if recent %}
+<section class="panel recent-panel"><div class="section-head"><h2>Recent test activity</h2><a href="{{ url_for('reports') }}">All reports →</a></div>
+<div class="table-scroll"><table><thead><tr><th>Endpoint</th><th>Role</th><th>Expected</th><th>Observed</th><th>Result</th></tr></thead><tbody>
+{% for r in recent %}<tr><td><a href="{{ url_for('run_detail', run_id=r.id) }}"><span class="method {{ r.method|lower }}">{{ r.method }}</span> <code>{{ r.path }}</code></a></td><td>{{ r.role }}</td><td>{{ r.expected|upper }}</td><td>{{ r.observed|upper }}</td><td><span class="status {{ r.status|lower }}">{{ r.status }}</span></td></tr>{% endfor %}
+</tbody></table></div></section>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.py[cod]
+apipath_sentinel.db
+uploads/
+.env
+
+__pycache__/
+*.pyc
+*.db
+uploads/

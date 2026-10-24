@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}{{ spec.name }} · APIPath Sentinel{% endblock %}
+{% block content %}
+<div class="breadcrumbs"><a href="{{ url_for('index') }}">Dashboard</a><span>/</span>{{ spec.name }}</div>
+<section class="page-heading"><div><div class="eyebrow">SPECIFICATION</div><h1>{{ spec.name }}</h1><p>{{ spec.filename }} · Imported {{ spec.imported_at }}</p></div>
+<form method="post" action="{{ url_for('delete_spec', spec_id=spec.id) }}" onsubmit="return confirm('Delete this specification and all related rules and evidence?')"><button class="btn danger-outline" type="submit">Delete spec</button></form></section>
+<div class="section-head"><div><h2>Endpoint inventory</h2><p class="muted">Select an operation to configure expected access by role.</p></div><span class="tag">{{ endpoints|length }} operations</span></div>
+<div class="panel table-panel"><div class="table-scroll"><table><thead><tr><th>Method</th><th>Path</th><th>Operation</th><th>Roles configured</th><th>Tests</th><th></th></tr></thead><tbody>
+{% for ep in endpoints %}<tr><td><span class="method {{ ep.method|lower }}">{{ ep.method }}</span></td><td><code>{{ ep.path }}</code></td><td>{{ ep.summary or ep.operation_id or '—' }}</td><td>{{ ep.role_count }}</td><td>{{ ep.run_count }}</td><td><a class="small-link" href="{{ url_for('endpoint_detail', endpoint_id=ep.id) }}">Configure →</a></td></tr>{% endfor %}
+</tbody></table></div></div>
+{% endblock %}

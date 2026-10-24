@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}{{ ep.method }} {{ ep.path }} · APIPath Sentinel{% endblock %}
+{% block content %}
+<div class="breadcrumbs"><a href="{{ url_for('index') }}">Dashboard</a><span>/</span><a href="{{ url_for('spec_detail', spec_id=ep.spec_id) }}">{{ ep.spec_name }}</a><span>/</span>Endpoint</div>
+<section class="page-heading endpoint-heading"><div><div class="eyebrow">ENDPOINT AUTHORIZATION</div><h1><span class="method {{ ep.method|lower }}">{{ ep.method }}</span> <code>{{ ep.path }}</code></h1><p>{{ ep.summary or ep.operation_id or 'No operation description in specification.' }}</p></div></section>
+<div class="two-col">
+<section class="panel"><div class="section-head"><div><div class="eyebrow">ACCESS POLICY</div><h2>Role-permission matrix</h2></div></div>
+<p class="muted">Record what each role should be allowed to do. Use the same role labels you will use when testing.</p>
+<form method="post" action="{{ url_for('save_permission', endpoint_id=ep.id) }}" class="stack-form">
+<label>Role name<input name="role" placeholder="e.g. user, admin, owner" required maxlength="80"></label>
+<label>Expected access<select name="expected"><option value="allow">Allow access</option><option value="deny">Deny access</option></select></label>
+<label>Notes (optional)<input name="notes" placeholder="e.g. users can only edit their own profile"></label>
+<button class="btn primary" type="submit">Save permission rule</button>
+</form>
+{% if perms %}<div class="policy-list">{% for p in perms %}<div class="policy-row"><div><strong>{{ p.role }}</strong><small>{{ p.notes or 'No notes' }}</small></div><span class="decision {{ p.expected }}">{{ p.expected|upper }}</span><form method="post" action="{{ url_for('delete_permission', endpoint_id=ep.id, permission_id=p.id) }}"><button class="icon-btn" title="Delete rule" aria-label="Delete rule">×</button></form></div>{% endfor %}</div>{% else %}<div class="hint">No roles configured yet. Add at least one rule before running a test.</div>{% endif %}
+</section>
+<section class="panel"><div class="section-head"><div><div class="eyebrow">CONTROLLED REQUEST</div><h2>Run a test</h2></div><span class="tag">One request</span></div>
+<div class="notice"><strong>Authorization required</strong><p>Run only against an API you own or have permission to test. Use a dedicated test account and non-production records.</p></div>
+<form method="post" action="{{ url_for('run_test', endpoint_id=ep.id) }}" class="stack-form">
+<label>Base URL<input name="base_url" type="url" placeholder="https://api.github.com" required></label>
+<label>Role under test<select name="role" required>{% for p in perms %}<option value="{{ p.role }}">{{ p.role }} — expect {{ p.expected }}</option>{% endfor %}</select></label>
+<label>Test account headers (JSON)<textarea name="headers_json" rows="3" placeholder='{"Authorization":"Bearer YOUR_TEST_TOKEN"}'>{}</textarea><small>Secrets are redacted in stored request-header evidence.</small></label>
+<label>Path parameter values (JSON)<textarea name="path_values" rows="2" placeholder='{"userId":"test-user-123"}'>{}</textarea><small>For GitHub examples: user profile = {"username":"octocat"}; repository = {"owner":"octocat","repo":"Spoon-Knife"}. Unfilled values default to 1.</small></label>
+<label>Query parameters (JSON)<textarea name="query_json" rows="2" placeholder='{"include":"profile"}'>{}</textarea></label>
+<label>JSON request body (optional)<textarea name="body_json" rows="3" placeholder='{"displayName":"Authorization test"}'></textarea></label>
+<label class="checkline"><input type="checkbox" name="authorized" value="yes" required><span>I own this target or have explicit permission to test it.</span></label>
+<button class="btn primary full" type="submit">Send controlled test request →</button>
+</form>
+</section>
+</div>
+<section class="panel recent-panel"><div class="section-head"><div><h2>Recent evidence</h2><p class="muted">Latest 20 tests for this operation.</p></div></div>
+{% if runs %}<div class="table-scroll"><table><thead><tr><th>ID / Time</th><th>Role</th><th>Expected</th><th>Observed</th><th>HTTP</th><th>Result</th></tr></thead><tbody>{% for r in runs %}<tr><td><a href="{{ url_for('run_detail', run_id=r.id) }}">#{{ r.id }}</a><small>{{ r.created_at }}</small></td><td>{{ r.role }}</td><td>{{ r.expected|upper }}</td><td>{{ r.observed|upper }}</td><td>{{ r.http_status or '—' }}</td><td><span class="status {{ r.status|lower }}">{{ r.status }}</span></td></tr>{% endfor %}</tbody></table></div>{% else %}<div class="hint">No tests have been run for this endpoint.</div>{% endif %}
+</section>
+{% endblock %}

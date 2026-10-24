@@ -1,0 +1,4 @@
+# Direct dependency constraints; NOT a fully resolved transitive lockfile.
+Flask>=3.0,<4.0
+requests>=2.31,<3.0
+PyYAML>=6.0,<7.0
