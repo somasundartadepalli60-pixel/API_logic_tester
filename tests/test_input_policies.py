@@ -92,3 +92,8 @@ class TestPolicy98(unittest.TestCase):
     """Verify service role accepted."""
     def test_service_role_accepted(self):
         self.assertIs(evaluate(('POST', '/jobs', 202, 'service', 'review')), True)
+
+class TestPolicy99(unittest.TestCase):
+    """Verify unknown decision rejected."""
+    def test_unknown_decision_rejected(self):
+        self.assertIs(evaluate(('GET', '/items', 200, 'viewer', 'maybe')), False)
