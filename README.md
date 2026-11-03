@@ -1,4 +1,4 @@
-# APIPath Sentinel — API Authorization Logic Tester
+# Website - Role based access testing tool 
 
 APIPath Sentinel is a local-first web tool for checking whether API endpoints enforce expected role-based authorization consistently. It imports OpenAPI specifications, lets a tester define expected Allow/Deny rules per role, sends individual test requests using explicitly supplied test-account headers, compares the observed result with the expected decision, and stores reproducible evidence in SQLite.
 
