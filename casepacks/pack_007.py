@@ -1,4 +1,4 @@
-"""API validation fixture pack 007: deterministic method/path/status/role expectations."""
+
 CASES = (
     ('GET', "/api/v3/resource/007/item/0000", 401, 'editor', 'deny'),
     ('POST', "/api/v3/resource/007/item/0001", 401, 'editor', 'deny'),

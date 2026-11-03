@@ -1,4 +1,4 @@
-"""API validation fixture pack 002: deterministic method/path/status/role expectations."""
+
 CASES = (
     ('PUT', "/api/v3/resource/002/item/0000", 202, 'editor', 'allow'),
     ('PATCH', "/api/v3/resource/002/item/0001", 202, 'editor', 'allow'),

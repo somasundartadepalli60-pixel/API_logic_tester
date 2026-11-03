@@ -1,4 +1,4 @@
-"""API validation fixture pack 003: deterministic method/path/status/role expectations."""
+
 CASES = (
     ('PATCH', "/api/v4/resource/003/item/0000", 204, 'admin', 'allow'),
     ('DELETE', "/api/v4/resource/003/item/0001", 204, 'admin', 'allow'),
