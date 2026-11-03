@@ -14,6 +14,6 @@ def evaluate(case):
         return False
     return expected in ("allow", "deny", "review")
 
-def validate_pack(number):
-    module = importlib.import_module(f"casepacks.pack_{number:03d}")
+def validate_pack(num):
+    module = importlib.import_module(f"casepacks.pack_{num:03d}")
     return sum(evaluate(case) for case in module.CASES), len(module.CASES)
