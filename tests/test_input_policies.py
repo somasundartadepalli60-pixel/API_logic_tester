@@ -1,4 +1,4 @@
-"""Security and API contract input policy regression tests."""
+"""Security and API contract input policy regression testing."""
 import unittest
 from casepacks.engine import evaluate
 
