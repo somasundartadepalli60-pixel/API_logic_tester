@@ -4,7 +4,7 @@ APIPath Sentinel is a local-first web tool for checking whether API endpoints en
 
 ## What it does
 
-- Import OpenAPI 3.x / Swagger-style JSON or YAML specifications with `paths`.
+- Import OpenAPI 3.x / Swagger-style JSON or YAML specifications with `paths`. 
 - Discover endpoint operations and inspect their parameters and request-body definitions.
 - Define an expected `Allow` or `Deny` result for each endpoint and role.
 - Run one controlled request at a time against a base URL you provide.
