@@ -5,4 +5,4 @@
 - 80 local feature branches were merged with `--no-ff` (not hosted PRs).
 - Existing Flask UI and original files retained.
 - Dependencies must be installed to run the Flask app.
-- `requirements.lock` contains direct constraints only, not a complete resolved lock.
+- contains direct constraints only, not a complete resolved lock.
